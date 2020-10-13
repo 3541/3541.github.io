@@ -1,0 +1,28 @@
+a.current {
+    font-style: italic
+}
+
+div.nav {
+    height: 2.6rem;
+    margin-bottom: 1rem;
+}
+
+nav.root {
+    margin-top: 3rem;
+}
+
+.subnav {
+    margin-left: 5rem;
+}
+
+nav a {
+    margin-right: 0.5rem;
+}
+
+section.switcher-section:not(.active) {
+    display: none;
+}
+
+nav.switcher a.active {
+    text-decoration: underline;
+}

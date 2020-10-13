@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/assets/css/tufte.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
+    <title>3541 &mdash; COMP20003 Local Work Environments</title>
+</head>
+<body>
+    <article>
+        <div class="nav">
+            <div markdown="0">
+
+<nav class="root">
+    
+    <a href="/" >
+        Home
+    </a>
+    
+    <a href="/projects/" >
+        Projects
+    </a>
+    
+</nav>
+
+</div>
+
+            
+        </div>
+
+        <h1> COMP20003 Local Work Environments </h1>
+        
+        <h1 id="table-of-contents">Table of Contents</h1>
+
+<ul>
+  <li><a href="#introduction">Introduction</a></li>
+  <li><a href="#docker">Docker</a>
+    <ul>
+      <li><a href="#installing-docker">Installing Docker</a></li>
+      <li><a href="#installing-the-comp20003-container">Installing the COMP20003 Container</a></li>
+      <li><a href="#docker-notes">Docker Notes</a></li>
+    </ul>
+  </li>
+  <li><a href="#local-options">Local Options</a></li>
+  <li><a href="#final-notes">Final Notes</a></li>
+</ul>
+
+<section>
+
+  <h1 id="introduction">Introduction</h1>
+  <p>Given the recent JupyterHub instability (and the panic that has caused), and the
+apparent difficulty some people have experienced trying to get a stable local
+environment up and running, I thought I would write up this document – both
+to help people decide between the many options available, and to provide a guide
+as to how best to set each of them up. Being comfortable with one’s tools and
+able to independently maintain them is a crucial skill for a programmer/software
+engineer, and maintaining your own local development environment is an important
+part of that.</p>
+
+  <p>This document assumes a basic level of computer competence, including but not
+limited to being capable of independently installing software on your platform
+of choice, and being able to follow external documentation, as well as basic
+competence with the shell of your platform of choice (that is, <code class="language-plaintext highlighter-rouge">zsh</code>, <code class="language-plaintext highlighter-rouge">bash</code>,
+<code class="language-plaintext highlighter-rouge">cmd</code> or <code class="language-plaintext highlighter-rouge">PowerShell</code>). A helpful resource for learning basic Unix skills is the
+MIT Missing Semester subject, designed to instill basic computer competence for
+new Computer Science students. It can be found
+<a href="https://missing.csail.mit.edu/">here</a>, and provides an introduction to such
+topics as the shell, debugging, and command-line editors.</p>
+
+  <h2 id="options">Options</h2>
+  <p>The main available options are divided in a few ways. Firstly, you can either
+use the COMP20003 Docker container to exactly replicate the online Jupyter
+environment (only without the annoying disk quotas and crashing). This is a good
+option if you’re feeling overwhelmed by the other options.</p>
+
+  <p>For an actual local environment, everything else is a little different between
+platforms. macOS and Linux are somewhat more convenient here, since they provide
+an (approximately) POSIX-esque build environment. Windows users will typically
+need to resort to some kind of emulation/virtualization in order to achieve the
+same, though this is generally a low-friction process. These options are
+discussed in later sections.</p>
+
+  <p>While managing a local development environment may seem like a more daunting
+prospect than simply using Docker, I would strongly encourage the curious to
+attempt it – anyone intending to seriously pursue computer science or software
+development absolutely <em>must</em> know how to manage their own software and
+deveopment environment, and now is as good a time as any to begin learning.</p>
+
+  <p>For every environment, instructions are provided for every major platform. Linux
+instructions will be a bit more terse, as there are significant differences
+between the many Linux distributions, and because it is assumed that Linux users
+will be comfortable manually installing software on their chosen platform.</p>
+
+  <p>Some general notes:</p>
+  <ul>
+    <li>When an instruction says you should run a command, <em>make sure it completes
+successfully</em> before moving on. In general, don’t ignore errors, and don’t
+move forwards until you’ve correctly completed the previous steps.</li>
+    <li>Read compatibility lists. A lot of the software discussed requires certain
+versions of Windows or macOS, or has different procedures depending on your
+version. Pay attention and don’t just proceed blindly.</li>
+    <li>
+      <p>This guide tries to be as complete as possible, but there will be gaps. In
+general, a good developer must be able to do research to answer their own
+questions. Feel free to submit suggestions as to new content to add to this
+document, but also try to get into the practice of self-reliant research and
+investigation. Google, StackOverflow, and the manpages are all your friends.</p>
+    </li>
+    <li>If you prefer the sound of the Docker option, click <a href="#docker">here</a>.</li>
+    <li>If you want a true local development environment, click <a href="#local-options">here</a>.</li>
+  </ul>
+
+</section>
+
+<section>
+
+  <h1 id="docker">Docker</h1>
+  <p><a href="https://en.wikipedia.org/wiki/Docker_(software)">Docker</a> is a software package
+which allows the orchestration and execution of <em>containers</em>. Containers are
+more or less packaged environments, allowing the easy transfer and deployment of
+large software services. They are commonly used in large-scale server
+environments, but are also useful for individual developers, as seen here.</p>
+
+  <p>As discussed above, the COMP20003 Docker container provides a near-exact replica
+of the online Jupyter environment. Instructions on installing it can be found on
+<a href="https://canvas.lms.unimelb.edu.au/courses/87167/files/4850077/download">Canvas</a>,
+but will also be detailed in the following section. First, Docker must be
+installed.</p>
+
+  <h2 id="installing-docker">Installing Docker</h2>
+
+  <p><span class="marginnote">When a menu like this appears, it means the following
+content is platform-dependent. Click on your operating system to display the
+appropriate content.</span></p>
+
+  <div>
+
+<script type="text/javascript" src="/assets/js/switcher.js"></script>
+
+<nav class="switcher" id="install_docker">
+    
+    <a id="install_docker_link_Windows" class="active" onclick="switch_to('install_docker', 'Windows')">Windows</a>
+    
+    <a id="install_docker_link_macOS" onclick="switch_to('install_docker', 'macOS')">macOS</a>
+    
+    <a id="install_docker_link_Linux" onclick="switch_to('install_docker', 'Linux')">Linux</a>
+    
+</nav>
+
+</div>
+
+  <div id="install_docker_content">
+
+    <section class="switcher-section active" id="install_docker_Windows">
+
+      <p>The official Docker documentation for installing on Windows can be found
+<a href="https://docs.docker.com/docker-for-windows/install/">here</a>. If you have Windows
+10 Home, you should follow <a href="https://docs.docker.com/docker-for-windows/install-windows-home/">these
+instructions</a>
+instead. Windows 10 Home users must also enable WSL2 using the instructions
+<a href="#wsl">here</a>, before installing Docker.</p>
+
+      <p><span class="marginnote">If you don’t know your Windows SKU, you can check by
+going to File Explorer, right-clicking “This PC”, and clicking “Properties”.</span></p>
+
+      <p>With that accomplished (or not, for those on other Windows SKUs),
+you should download and run the Docker Desktop installer from
+<a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows/">here</a>.
+The “Stable” version should be strongly preferred.</p>
+
+      <p><span class="marginnote">Particularly intrepid Windows users may prefer to
+install Docker using <code class="language-plaintext highlighter-rouge">winget</code>, instead. Instructions for this are not provided
+here, as <code class="language-plaintext highlighter-rouge">winget</code> is experimental software, and I suspect anyone using it
+voluntarily knows what they’re doing already.</span></p>
+
+      <p>When prompted with the “Configuration” page, ensure that either “Enable Hyper-V
+Windows Features” or “Enable WSL 2 Features” is checked, depending on your
+version of Windows. The following screenshot shows Windows 10 Professional.</p>
+
+      <figure>
+
+        <p><img src="/assets/img/comp20003/docker_windows_install.PNG" alt="Configure" /></p>
+
+      </figure>
+
+      <p>The installation will likely take quite some time.</p>
+
+      <figure>
+
+        <p><img src="/assets/img/comp20003/docker_windows_installing.PNG" alt="Installing" /></p>
+
+      </figure>
+
+      <figure>
+
+        <p><span class="marginnote">
+<img src="/assets/img/comp20003/docker_windows_taskbar.png" alt="Taskbar icon" />
+<br /> <em>Docker taskbar icon.</em>
+</span></p>
+
+      </figure>
+
+      <p>Once the installation finishes and you have restarted your computer, you should
+see an icon for Docker in the bottom right of the taskbar. After a few minutes,
+you will receive a notification indicating that Docker has started, and a window
+will pop up offering a tutorial. You may skip the tutorial.</p>
+
+      <p>Open a terminal of your choice (both PowerShell and CMD should work), and run
+the command <code class="language-plaintext highlighter-rouge">docker ps</code>. The result should be something like the following</p>
+
+      <figure class="fullwidth">
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PS C:\Users\alex1&gt; docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+PS C:\Users\alex1&gt;
+</code></pre></div>        </div>
+
+      </figure>
+
+      <p>If this works, Docker is installed and working.</p>
+
+    </section>
+
+    <section class="switcher-section" id="install_docker_macOS">
+
+      <p>The official Docker documentation for installing on macOS can be found
+<a href="https://docs.docker.com/docker-for-mac/install/">here</a>. In summary, Docker
+Desktop is installed as a normal macOS application – you download the DMG from
+<a href="https://hub.docker.com/editions/community/docker-ce-desktop-mac/">here</a> and
+drag the application over to your Applications directory. It is strongly
+recommended that you use the “Stable” version.</p>
+
+      <figure>
+
+        <p><img src="/assets/img/comp20003/macos_docker_install.png" alt="Drag/drop" /></p>
+
+      </figure>
+
+      <p>You must then run the application at least once to allow initial setup. At this
+point you will probably be prompted for your password. Enter it and continue.
+You should see an icon in the top bar.</p>
+
+      <figure>
+
+        <p><img src="/assets/img/comp20003/macos_docker_pw.png" alt="Password prompt" /></p>
+
+      </figure>
+
+      <p>Wait until the menu no longer says “Docker Desktop is starting.” This may take
+some time – be patient.</p>
+
+      <figure>
+
+        <p><img src="/assets/img/comp20003/macos_docker_starting.png" alt="Starting up" /></p>
+
+      </figure>
+
+      <p>You may skip the tutorial. Open a terminal and run <code class="language-plaintext highlighter-rouge">docker ps</code> to test that
+everything is working. You should see something like this:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+</code></pre></div>      </div>
+      <p>If you do, Docker is now installed and working.</p>
+
+    </section>
+
+    <section class="switcher-section" id="install_docker_Linux">
+
+      <p>Install Docker using your distribution’s package manager. For some
+distributions, it may be desirable or necessary to add a repository in order to
+do this. Instructions for specific distributions are provided
+<a href="https://docs.docker.com/engine/install/">here</a>.</p>
+
+      <p>Once the package has been installed, you will need to add your user to the
+<code class="language-plaintext highlighter-rouge">docker</code> group:</p>
+      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>usermod <span class="nt">-a</span> <span class="nt">-G</span> docker &lt;username&gt;
+</code></pre></div>      </div>
+      <p>You will also probably need to log out and back in for the group change to take
+effect. Then, enable and start the Docker service. This is different depending
+on your service manager:</p>
+      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># systemd</span>
+systemctl <span class="nb">enable</span> <span class="nt">--now</span> docker
+
+<span class="c"># openrc</span>
+rc-update add docker default
+rc-service docker start
+
+<span class="c"># other: You're on your own here.</span>
+</code></pre></div>      </div>
+      <p>Run <code class="language-plaintext highlighter-rouge">docker ps</code> to ensure that the service is running and your permissions are
+set correctly. You should see output similar to the following:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>~ $ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+</code></pre></div>      </div>
+      <p>Likely sources of errors at this stage include the Docker service being offline,
+and the <code class="language-plaintext highlighter-rouge">docker</code> group not being set correctly. If this works, Docker is now
+installed and working.</p>
+
+    </section>
+
+  </div>
+
+  <h2 id="installing-the-comp20003-container">Installing the COMP20003 Container</h2>
+
+  <p>To download the COMP20003 container, run the following command in any terminal:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker pull gradyfitz/comp20003-jupyter-c-kernel:latest
+</code></pre></div>  </div>
+  <p>This will take a while, but once it completes, you can run the container using
+the following command:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -p 8888:8888 --rm --cap-add SYS_PTRACE --mount type=bind,src="&lt;PATH&gt;",dst="/home/jovyan/storage" gradyfitz/comp20003-jupyter-c-kernel:latest
+</code></pre></div>  </div>
+  <p>The string <code class="language-plaintext highlighter-rouge">&lt;PATH&gt;</code> should be replaced with the full path to a directory on your
+host machine. This is where persistent data will be saved from the container.
+Since the container is ephemeral, any files you want to save between runs of the
+container must be saved to <code class="language-plaintext highlighter-rouge">/home/jovyan/storage</code> in Jupyter. These files will
+appear on the host machine in the given path.</p>
+
+  <p>You should see output something like this:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Executing the command: jupyter notebook
+[I 06:21:19.760 NotebookApp] Writing notebook server cookie secret to /home/jovyan/.local/share/jupyter/runtime/notebook_cookie_secret
+[I 06:21:24.038 NotebookApp] JupyterLab extension loaded from /opt/conda/lib/python3.7/site-packages/jupyterlab
+[I 06:21:24.039 NotebookApp] JupyterLab application directory is /opt/conda/share/jupyter/lab
+[I 06:21:28.034 NotebookApp] Loading the assignment_list nbgrader serverextension
+[I 06:21:28.050 NotebookApp] Loading the formgrader nbgrader serverextension
+[W 06:21:28.063 NotebookApp] Outdated config: use CourseDirectory.course_id rather than Exchange.course_id
+[I 06:21:28.089 NotebookApp] Loading the validate_assignment nbgrader serverextension
+[I 06:21:28.091 NotebookApp] Serving notebooks from local directory: /home/jovyan
+[I 06:21:28.091 NotebookApp] The Jupyter Notebook is running at:
+[I 06:21:28.091 NotebookApp] http://ef2727ac6cfd:8888/?token=d7cdb64495b656dd7eaa1adbeb3a9235558f0486c61bc8ea
+[I 06:21:28.097 NotebookApp]  or http://127.0.0.1:8888/?token=d7cdb64495b656dd7eaa1adbeb3a9235558f0486c61bc8ea
+[I 06:21:28.097 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 06:21:28.106 NotebookApp]
+
+    To access the notebook, open this file in a browser:
+        file:///home/jovyan/.local/share/jupyter/runtime/nbserver-6-open.html
+    Or copy and paste one of these URLs:
+        http://ef2727ac6cfd:8888/?token=d7cdb64495b656dd7eaa1adbeb3a9235558f0486c61bc8ea
+     or http://127.0.0.1:8888/?token=d7cdb64495b656dd7eaa1adbeb3a9235558f0486c61bc8ea
+</code></pre></div>  </div>
+  <p>Copy and paste the URL in your output beginning with <code class="language-plaintext highlighter-rouge">127.0.0.1</code> into a browser
+and visit it. You should see a file browser interface. To visit the JupyterLab
+interface, replace the end of the URL (<code class="language-plaintext highlighter-rouge">/tree</code>) with <code class="language-plaintext highlighter-rouge">/lab</code>.</p>
+
+  <p>It is convenient to save this command in some kind of script file for repeated
+use.</p>
+
+  <div>
+
+<script type="text/javascript" src="/assets/js/switcher.js"></script>
+
+<nav class="switcher" id="run_docker">
+    
+    <a id="run_docker_link_Windows" class="active" onclick="switch_to('run_docker', 'Windows')">Windows</a>
+    
+    <a id="run_docker_link_macOS-Linux" onclick="switch_to('run_docker', 'macOS-Linux')">macOS-Linux</a>
+    
+</nav>
+
+</div>
+
+  <div id="run_docker_content">
+
+    <section class="switcher-section active" id="run_docker_Windows">
+
+      <p>Open your favorite text editor and create a file called <code class="language-plaintext highlighter-rouge">run_docker.bat</code> with
+the following contents:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -p 8888:8888 --rm --cap-add SYS_PTRACE --mount type=bind,src="&lt;PATH&gt;",dst="/home/jovyan/storage" gradyfitz/comp20003-jupyter-c-kernel:latest
+</code></pre></div>      </div>
+      <p>You can then double-click the file to start the container.</p>
+
+    </section>
+
+    <section class="switcher-section" id="run_docker_macOS-Linux">
+
+      <p>Open your favorite text editor and create a file called <code class="language-plaintext highlighter-rouge">run_docker.sh</code> with the
+following contents:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -p 8888:8888 --rm --cap-add SYS_PTRACE --mount type=bind,src="&lt;PATH&gt;",dst="/home/jovyan/storage" gradyfitz/comp20003-jupyter-c-kernel:latest
+</code></pre></div>      </div>
+      <p>From a terminal, change directory to the location of the script and run <code class="language-plaintext highlighter-rouge">chmod
++x run_docker.sh</code>. Then, whenever you wish to run the container, you can simply
+change directory to the location of the script and run <code class="language-plaintext highlighter-rouge">./run_docker.sh</code>.</p>
+
+    </section>
+
+  </div>
+
+  <h2 id="docker-notes">Docker Notes</h2>
+
+  <ul>
+    <li>Be sure to remember to save your work to the shared directory. Anything else
+will be lost when the container restarts.</li>
+    <li>The Docker container runs in the background. You can see which containers are
+running using <code class="language-plaintext highlighter-rouge">docker ps</code>. If you wish to stop the container, run <code class="language-plaintext highlighter-rouge">docker stop
+ID</code> where <code class="language-plaintext highlighter-rouge">ID</code> is the <code class="language-plaintext highlighter-rouge">CONTAINER ID</code> field from the output of <code class="language-plaintext highlighter-rouge">docker ps</code>.</li>
+  </ul>
+
+</section>
+
+<section>
+
+  <h1 id="local-options">Local Options</h1>
+
+  <p>There are three critical components necessary for a development environment in
+COMP20003: a compiler toolchain, <code class="language-plaintext highlighter-rouge">make</code>, and an editor. Many editors have their
+own build systems, but since we are required to submit a <code class="language-plaintext highlighter-rouge">Makefile</code> for
+projects, it is advisable to instead use <code class="language-plaintext highlighter-rouge">make</code>. It may even be possible to
+configure your editor to build using an existing <code class="language-plaintext highlighter-rouge">Makefile</code>. For the time being,
+this document will cover only the toolchain and build system setup, as editors
+are far more varied and mostly self-explanatory.</p>
+
+  <div>
+
+<script type="text/javascript" src="/assets/js/switcher.js"></script>
+
+<nav class="switcher" id="local">
+    
+    <a id="local_link_Windows" class="active" onclick="switch_to('local', 'Windows')">Windows</a>
+    
+    <a id="local_link_macOS" onclick="switch_to('local', 'macOS')">macOS</a>
+    
+</nav>
+
+</div>
+
+  <div id="local_content">
+
+    <section class="switcher-section active" id="local_Windows">
+
+      <p>The two main options for Windows users are WSL and mingw/MSYS. Other
+Windows-centric build systems and environments (such as MSVC/VC++) are not
+discussed here, since they are not suited to building software which can be run
+on Linux (as is required of projects in this subject).</p>
+
+      <p>They key difference to note between the two is that WSL (Windows Subsystem for
+Linux) provides an actual Linux environment on Windows, by way of API
+translation (in WSL1) or virtualization (WSL2), while mingw provides a GNU
+compiler toolchain suited to building software that runs on Windows. MSYS
+provides a POSIX-like environment which can be used to conveniently run the
+mingw toolchain. Thus, WSL provides a Linux build and runtime environment, while
+mingw/MSYS provide a POSIX-ish build environment, but create executables which
+run on Windows. The upshot is that WSL is probably more similar to the target
+environment for COMP20003 projects, while mingw/MSYS is “more native”.</p>
+
+      <p>Note that, since mingw/MSYS does not provide a runtime translation layer,
+certain POSIX-specific APIs may be unavailable. For example, <code class="language-plaintext highlighter-rouge">getline</code> is not
+available under mingw. This is often not an issue, since there are usually
+alternatives in the C standard library (e.g., <code class="language-plaintext highlighter-rouge">fgets</code>), but it is something to
+be aware of when building other people’s software, and may be a point of
+preference towards WSL.</p>
+
+      <h2 id="wsl">WSL</h2>
+
+      <p>WSL is available in two major versions. They are architecturally very different,
+but the end result will be mostly the same.</p>
+
+      <p><span class="marginnote">For those interested, the techincal difference is as
+follows: WSL1 provides a sort of translation layer of the Linux system call
+interface, transparently mapping APIs to the Windows equivalent. It is very much
+like the converse of Wine. WSL2, by contrast, virtualizes an actual Linux
+kernel. This makes WSL2 often much faster, and may give it better accuracy to
+actual Linux behavior in many edge cases.</span></p>
+
+      <p>WSL requires Windows 10, so if you are running an earlier version, you may wish
+to <a href="#mingw-w64msys2">skip to the next section</a>. The official Microsoft
+documentation on setting up WSL is available
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10">here</a>. It is
+recommended that you use WSL2 if you have a recent enough version of Windows 10
+(version 1903 or later). The following steps are marked as (1), (2), or (BOTH),
+depending on which version they apply to. You will need to open an
+administrative terminal (PowerShell or CMD), and do the following:</p>
+
+      <ul>
+        <li>(BOTH):
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+</code></pre></div>          </div>
+        </li>
+        <li>(2):
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+</code></pre></div>          </div>
+        </li>
+        <li>
+          <p>(BOTH): Restart your computer.</p>
+        </li>
+        <li>
+          <p>(2): Download and install the <a href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi">kernel update package</a>.</p>
+        </li>
+        <li>(2):
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wsl --set-default-version 2
+</code></pre></div>          </div>
+        </li>
+        <li>(BOTH): Open the Store program using <a href="https://aka.ms/wslstore">this link</a> and
+install the Linux distribution of your choice. This guide will use Debian, but
+feel free to research and choose something to your preference.</li>
+      </ul>
+
+      <h2 id="mingw-w64msys2">mingw-w64/MSYS2</h2>
+
+    </section>
+
+    <section class="switcher-section" id="local_macOS">
+
+      <p>macOS</p>
+
+    </section>
+
+  </div>
+
+</section>
+
+<section>
+
+  <h1 id="final-notes">Final Notes</h1>
+  <p>I have attempted to make this document as complete as possible, but there will
+inevitably be oversights and errors. Please submit any questions or errata to my
+student email (obrienad). General questions may also be directed to the Piazza
+forum.</p>
+
+  <p>Best of luck to you all.</p>
+
+  <p>– Alex O’Brien</p>
+
+</section>
+
+    </article>
+</body>
+</html>
