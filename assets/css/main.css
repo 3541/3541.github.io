@@ -1,5 +1,17 @@
 a.current {
-    font-style: italic
+    font-style: italic;
+}
+
+a.current::after {
+    font-style: normal;
+    content: attr(data-content);
+    height: 0;
+    visibility: hidden;
+    text-decoration: none;
+
+    @media speech {
+        display: none;
+    }
 }
 
 div.nav {
@@ -17,6 +29,9 @@ nav.root {
 
 nav a {
     margin-right: 0.5rem;
+    display: inline-flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 section.switcher-section:not(.active) {

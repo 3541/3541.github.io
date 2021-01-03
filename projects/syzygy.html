@@ -13,11 +13,11 @@
 
 <nav class="root">
     
-    <a href="/" >
+    <a href="/" data-content="Home" >
         Home
     </a>
     
-    <a href="/projects/" >
+    <a href="/projects/" data-content="Projects" >
         Projects
     </a>
     
@@ -28,7 +28,15 @@
             
             <nav class="subnav">
     
-    <a href="/projects/syzygy.html"  class="current"
+    <a href="/projects/a3.html" data-content="a3" >
+        a3
+    </a>
+    
+    <a href="/projects/short-circuit.html" data-content="Short Circuit" >
+        Short Circuit
+    </a>
+    
+    <a href="/projects/syzygy.html" data-content="Syzygy"  class="current"
        >
         Syzygy
     </a>
@@ -39,14 +47,36 @@
         </div>
 
         <h1> Syzygy </h1>
-        
+
         <p class="subtitle">
-    A kernel written in Rust
+    Experimental OS kernel written in Rust
 </p>
 
-<p>Test content goes here.</p>
+<section>
+
+  <p><a href="https://github.com/3541/syzygy.git">Syzygy</a> is a fledgling operating system and
+kernel project, written for fun and for the learning experience. As such, it is
+unlikely to ever be finished (and has already seen one total rewrite).</p>
+
+  <figure>
+
+    <p><img src="https://raw.githubusercontent.com/3541/syzygy/trunk/doc/assets/cover.png" alt="Boot screenshot" /></p>
+
+  </figure>
+
+</section>
 
 
     </article>
+
+    <div markdown="0">
+
+    <footer>
+        &copy; 2020-2021 Alex O'Brien. Style
+        by <a href="https://github.com/edwardtufte/tufte-css">Tufte CSS</a>.
+    </footer>
+
+</div>
+
 </body>
 </html>

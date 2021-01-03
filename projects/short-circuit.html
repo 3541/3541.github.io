@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/assets/css/tufte.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
-    <title>3541 &mdash; Projects</title>
+    <title>3541 &mdash; Short Circuit</title>
 </head>
 <body>
     <article>
@@ -17,7 +17,7 @@
         Home
     </a>
     
-    <a href="/projects/" data-content="Projects"  class="current" >
+    <a href="/projects/" data-content="Projects" >
         Projects
     </a>
     
@@ -32,7 +32,8 @@
         a3
     </a>
     
-    <a href="/projects/short-circuit.html" data-content="Short Circuit" >
+    <a href="/projects/short-circuit.html" data-content="Short Circuit"  class="current"
+       >
         Short Circuit
     </a>
     
@@ -45,33 +46,19 @@
             
         </div>
 
-        <h1> Projects </h1>
+        <h1> Short Circuit </h1>
 
         <p class="subtitle">
-    Various projects of interest
+    High-performance web server built on io_uring
 </p>
 
-<ul>
-    
-    <li>
-        <a href="/projects/a3.html">
-            a3 &mdash; Lightweight C utility library
-        </a>
-    </li>
-    
-    <li>
-        <a href="/projects/short-circuit.html">
-            Short Circuit &mdash; High-performance web server built on io_uring
-        </a>
-    </li>
-    
-    <li>
-        <a href="/projects/syzygy.html">
-            Syzygy &mdash; Experimental OS kernel written in Rust
-        </a>
-    </li>
-    
-</ul>
+<section>
+
+  <p><a href="https://github.com/3541/short-circuit.git">Short Circuit</a> is an experimental
+web server for Linux. It uses the <code class="language-plaintext highlighter-rouge">io_uring</code> asynchronous I/O API to achieve
+great performance (over 100,000 requests per second) serving static files.</p>
+
+</section>
 
 
     </article>

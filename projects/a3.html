@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/assets/css/tufte.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/main.css">
-    <title>3541 &mdash; Projects</title>
+    <title>3541 &mdash; A3</title>
 </head>
 <body>
     <article>
@@ -17,7 +17,7 @@
         Home
     </a>
     
-    <a href="/projects/" data-content="Projects"  class="current" >
+    <a href="/projects/" data-content="Projects" >
         Projects
     </a>
     
@@ -28,7 +28,8 @@
             
             <nav class="subnav">
     
-    <a href="/projects/a3.html" data-content="a3" >
+    <a href="/projects/a3.html" data-content="a3"  class="current"
+       >
         a3
     </a>
     
@@ -45,33 +46,22 @@
             
         </div>
 
-        <h1> Projects </h1>
+        <h1> A3 </h1>
 
         <p class="subtitle">
-    Various projects of interest
+    Lightweight C utility library
 </p>
 
-<ul>
-    
-    <li>
-        <a href="/projects/a3.html">
-            a3 &mdash; Lightweight C utility library
-        </a>
-    </li>
-    
-    <li>
-        <a href="/projects/short-circuit.html">
-            Short Circuit &mdash; High-performance web server built on io_uring
-        </a>
-    </li>
-    
-    <li>
-        <a href="/projects/syzygy.html">
-            Syzygy &mdash; Experimental OS kernel written in Rust
-        </a>
-    </li>
-    
-</ul>
+<section>
+
+  <p>It seems like a solid 40% of every nontrivial C project is spent rewriting some
+very similar data structures and utilities.
+<a href="https://github.com/3541/liba3.git">liba3</a> is the logical conclusion to that
+state of affairs. It consists of a set of useful things I found myself
+constructing over and over again, including growable buffers, linked lists, a
+minimal logging framework, and slightly nicer strings.</p>
+
+</section>
 
 
     </article>
